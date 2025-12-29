@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammed Cemal Aktaş | Cyber Security Specialist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #bc13fe;
+            --neon-red: #ff003c;
+            --neon-green: #0aff0a;
+            --bg-dark: #050505;
+            --bg-panel: rgba(15, 15, 20, 0.6);
+            --glass-border: 1px solid rgba(0, 243, 255, 0.15);
+            --text-main: #e0e6ed;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body { cursor: default; }
+
+        body {
+            font-family: 'Rajdhani', 'Noto Sans', 'Segoe UI', Tahoma, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .cursor-magnifier { display: none !important; }
+ 
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #0a0a12 0%, #000000 100%);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.30); 
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 170, 255, 0.06); 
+            transition: background 0.18s ease, border-color 0.18s ease;
+        }
+
+        .logo {
+            font-family: 'Orbitron', 'Noto Sans', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #fff;
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+        }
+        .logo span { color: var(--neon-blue); }
+
+        nav ul { display: flex; gap: 30px; list-style: none; }
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-family: 'Share Tech Mono', 'Noto Sans', monospace;
+            transition: 0.3s;
+            position: relative;
+        }
+        nav a:hover { color: var(--neon-blue); text-shadow: 0 0 8px var(--neon-blue); }
+        
+        .lang-switch {
+            background: rgba(0, 170, 255, 0.461); 
+            border: 1px solid rgba(0, 170, 255, 0.22);
+            color: rgba(180, 240, 255, 0.95);
+            padding: 5px 15px;
+            font-family: 'Share Tech Mono', 'Noto Sans', monospace;
+            cursor: pointer;
+            transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+            font-weight: 700;
+            border-radius: 6px;
+            backdrop-filter: blur(4px);
+        }
+        .lang-switch:hover {
+            background: rgba(0, 170, 255, 0.14);
+            color: #00121a;
+            box-shadow: 0 6px 20px rgba(0, 170, 255, 0.18);
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', 'Noto Sans', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            position: relative;
+            animation: glitch 2s infinite alternate;
+        }
+        
+        .hero h2 {
+            font-family: 'Share Tech Mono', 'Noto Sans', monospace;
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-main {
+            padding: 12px 40px;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+            border: 1px solid var(--neon-blue);
+            color: #fff;
+            font-family: 'Orbitron', 'Noto Sans', sans-serif;
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .btn-main:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+        }
+
+        section { padding: 100px 10%; position: relative; }
+        .section-header { margin-bottom: 60px; border-left: 5px solid var(--neon-blue); padding-left: 20px; }
+        .section-title { font-family: 'Orbitron', 'Noto Sans', sans-serif; font-size: 2.5rem; color: #fff; text-transform: uppercase; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-text {
+            background: var(--bg-panel);
+            padding: 30px;
+            border: var(--glass-border);
+            border-radius: 5px;
+        }
+
+        .timeline {
+            position: relative;
+            border-left: 2px solid var(--neon-blue);
+            margin-left: 20px;
+        }
+        .timeline-item {
+            margin-bottom: 40px;
+            padding-left: 30px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background: var(--bg-dark);
+            border: 2px solid var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        .timeline-item h3 { color: #fff; font-size: 1.4rem; font-family: 'Orbitron', 'Noto Sans', sans-serif; }
+        .timeline-item h4 { color: var(--neon-purple); font-family: 'Share Tech Mono', 'Noto Sans', monospace; margin-bottom: 10px; }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: var(--bg-panel);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+        }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-color: var(--neon-blue); }
+        .project-card h3 { color: #fff; margin-bottom: 10px; font-family: 'Orbitron', 'Noto Sans', sans-serif; }
+        .project-link {
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 15px;
+        }
+
+        .achievements-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            perspective: 1000px;
+        }
+        .cyber-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+        }
+        .cyber-card img { width: 100%; border-radius: 5px; border: 1px solid #333; margin-bottom: 15px; }
+
+        .cert-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        .cert-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--neon-green);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+        .cert-box:hover { background: rgba(0, 255, 10, 0.05); transform: translateX(5px); }
+        .cert-title { font-weight: 700; color: #fff; }
+        .cert-issuer { color: #888; font-size: 0.9rem; font-family: 'Share Tech Mono', 'Noto Sans', monospace; }
+
+        .contact-box {
+            background: var(--bg-panel);
+            padding: 40px;
+            border: var(--glass-border);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .contact-info { margin-top: 30px; display: flex; flex-direction: column; gap: 15px; font-size: 1.2rem; }
+        .contact-row { display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .contact-row i { color: var(--neon-blue); }
+        .alert-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 243, 255, 0.05);
+            border: 1px dashed var(--neon-blue);
+            color: var(--neon-blue);
+            font-family: 'Share Tech Mono', 'Noto Sans', monospace;
+            font-size: 0.9rem;
+        }
+
+        footer { padding: 30px; text-align: center; border-top: 1px solid #333; background: #000; font-size: 0.8rem; color: #555; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            nav { display: none; } 
+            .achievements-container { grid-template-columns: 1fr; }
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px var(--neon-red), -2px -2px var(--neon-blue); }
+            100% { text-shadow: -2px 2px var(--neon-red), 2px -2px var(--neon-blue); }
+        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <a href="#" class="logo">By<span>MCA</span></a>
+        <nav>
+            <ul>
+                <li><a href="#about" data-lang="menu_about">Hakkımda</a></li>
+                <li><a href="#experience" data-lang="menu_exp">Deneyim</a></li>
+                <li><a href="#projects" data-lang="menu_projects">Projeler</a></li>
+                <li><a href="#achievements" data-lang="menu_achieve">Başarılar</a></li>
+                <li><a href="#certificates" data-lang="menu_cert">Sertifikalar</a></li>
+                <li><a href="#contact" data-lang="menu_contact">İletişim</a></li>
+            </ul>
+        </nav>
+        <button class="lang-switch" id="lang-btn">TR / EN</button>
+    </header>
+
+    <section class="hero">
+        <h1>M. Cemal Aktaş</h1>
+        <h2 id="typewriter"></h2>
+        <div style="margin-top: 20px;">
+            <a href="#contact" class="btn-main" data-lang="hero_btn">İletişime Geç</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="section-header reveal">
+            <h2 class="section-title" data-lang="title_about">Hakkımda</h2>
+        </div>
+        <div class="about-grid reveal">
+            <div class="about-text">
+                <p data-lang="about_p1" style="font-size: 1.1rem; margin-bottom: 20px;">
+                    2002 yılında Hatay Reyhanlı'da doğdum. Matematik ve Bilgisayar Programcılığı eğitimi aldım. Siber güvenlik ve IT yöneticiliği alanlarında uzmanlaştım.
+                </p>
+                <p data-lang="about_p2" style="font-size: 1.1rem; color: #ccc;">
+                    Siber güvenlik ve IT yöneticiliği alanlarında uzmanlaşmış bir teknoloji profesyoneliyim. Matematik ve Bilgisayar Programcılığı eğitimiyle şekillenen analitik düşünce yapım ve güçlü teknik becerilerimle, dijital güvenliği artırmayı ve teknoloji dünyasında yenilikçi çözümler sunmayı hedefliyorum.
+                </p>
+            </div>
+            <div class="about-stats" style="text-align: center;">
+                <i class="fas fa-user-secret" style="font-size: 8rem; color: var(--neon-blue); text-shadow: 0 0 20px var(--neon-blue);"></i>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="section-header reveal">
+            <h2 class="section-title" data-lang="title_exp">İş Deneyimleri</h2>
+        </div>
+        <div class="timeline reveal">
+            
+            <div class="timeline-item">
+                <h3 data-lang="exp_1_role">CIO</h3>
+                <h4 data-lang="exp_1_comp">MCA Ahşap Ambalaj</h4>
+            </div>
+
+            <div class="timeline-item">
+                <h3 data-lang="exp_2_role">Siber Güvenlik J.</h3>
+                <h4 data-lang="exp_2_comp">Ghost Voice</h4>
+            </div>
+
+            <div class="timeline-item">
+                <h3 data-lang="exp_3_role">Siber Güvenlik Uzmanı</h3>
+                <h4 data-lang="exp_3_comp">Türkiye Siber Kümelenme</h4>
+            </div>
+
+            <div class="timeline-item">
+                <h3 data-lang="exp_4_role">Bilişim ve Siber Güvenlik Uzmanı</h3>
+                <h4 data-lang="exp_4_comp">Herevdeyim.com</h4>
+            </div>
+
+            <div class="timeline-item">
+                <h3 data-lang="exp_5_role">Sosyal Medya Yöneticisi</h3>
+                <h4 data-lang="exp_5_comp">Herevdeyim</h4>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="section-header reveal">
+            <h2 class="section-title" data-lang="title_projects">Projeler</h2>
+        </div>
+        <div class="project-grid reveal">
+            
+            <div class="project-card">
+                <h3 data-lang="proj_1_title">Hadi Mobil Uygulama</h3>
+                <p data-lang="proj_desc">Gelişmiş mobil uygulama mimarisi ve güvenlik entegrasyonu.</p>
+                <a href="https://play.google.com/store/apps/details?id=io.kodular.akta_cemal.herevdeyim&hl=tr" class="project-link" data-lang="click_view">İncelemek İçin Tıkla <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+                <h3 data-lang="proj_2_title">Kali DDos Python</h3>
+                <p data-lang="proj_desc">Saldırı simülasyonları için Python tabanlı otomatik araç.</p>
+                <a href="https://github.com/byMCA/ddos-python" class="project-link" data-lang="click_view">İncelemek İçin Tıkla <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+                <h3 data-lang="proj_3_title">Hadi Alışveriş Sitesi</h3>
+                <p data-lang="proj_desc">Güvenli e-ticaret altyapısı ve ödeme sistemi entegrasyonu.</p>
+                <a href="https://github.com/byMCA/ddos-python" class="project-link" data-lang="click_view">İncelemek İçin Tıkla <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+                <h3 data-lang="proj_4_title">ESP Asistan Robot</h3>
+                <p data-lang="proj_desc">IoT tabanlı, sesli komut işleyen asistan robot projesi.</p>
+                <a href="https://github.com/byMCA/Esp32-Asistan-Gpt" class="project-link" data-lang="click_view">İncelemek İçin Tıkla <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="achievements">
+        <div class="section-header reveal">
+            <h2 class="section-title" data-lang="title_achieve">Kritik Başarılar</h2>
+        </div>
+        <div class="achievements-container reveal">
+            
+            <div class="cyber-card">
+                <img src="Ekran Alıntısı.PNG" alt="Shodan">
+                <h3 data-lang="ach_shodan_title">Shodan Zafiyet Keşfi</h3>
+                <p data-lang="ach_shodan_desc" style="color:#aaa; margin-bottom:10px;">Shodan sisteminde kritik bir zafiyet tespit edildi ve CEO ile iletişime geçildi.</p>
+                <a href="https://www.linkedin.com/posts/cemalaktas_i-recently-identified-a-vulnerability-in-activity-7363003571283357699-KOs5" target="_blank" class="project-link">LinkedIn Post <i class="fab fa-linkedin"></i></a>
+            </div>
+
+            <div class="cyber-card">
+                <img src="a.PNG" alt="CTF">
+                <h3 data-lang="ach_syber_title">SyberTÜRK CTF Derecesi</h3>
+                <p data-lang="ach_syber_desc" style="color:#aaa; margin-bottom:10px;">Ulusal çaptaki siber güvenlik yarışmasında üstün başarı ve sıralama.</p>
+                <a href="https://www.linkedin.com/posts/cemalaktas_cybersecurity-syberturk-activity-7407092261190086658-i1ft" target="_blank" class="project-link">LinkedIn Post <i class="fab fa-linkedin"></i></a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="certificates">
+        <div class="section-header reveal">
+            <h2 class="section-title" data-lang="title_cert">Sertifikalar & Eğitimler</h2>
+        </div>
+        <div class="cert-container reveal">
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_1">Ticari Yenilikler</div> <div class="cert-issuer">Hong Kong Üniversitesi</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_2">Innovation</div> <div class="cert-issuer">Harvard University</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_3">Sosyal Hizmetler</div> <div class="cert-issuer">Kolombiya Üniversitesi</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_4">Nicel Modelleme</div> <div class="cert-issuer">Pensilvanya Üniversitesi</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_5">Finansal Planlama</div> <div class="cert-issuer">Illinois Üniversitesi</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_6">İnsan Kaynakları</div> <div class="cert-issuer">Minnesota Üniversitesi</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_7">Siber Güvenlik Tehdit Alanı</div> <div class="cert-issuer">LinkedIn</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_8">Bilgi Güv. İçin Sosyal Beceriler</div> <div class="cert-issuer">LinkedIn</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_9">BT Güvenliği Esasları</div> <div class="cert-issuer">LinkedIn</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_10">Liderler için Risk Alma</div> <div class="cert-issuer">LinkedIn</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_11">VPN Öğrenmek</div> <div class="cert-issuer">Udemy</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_12">Yöneticiler için Siber Güvenlik</div> <div class="cert-issuer">LinkedIn</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_13">Etik Hack</div> <div class="cert-issuer">Udemy & CyberPath</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_14">Sızma Testi Kursu</div> <div class="cert-issuer">BTK Akademi</div> </div>
+            <div class="cert-box"> <div class="cert-title" data-lang="cert_15">Sosyal Medya Yönetimi</div> <div class="cert-issuer">TNC Group</div> </div>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+             <a href="https://drive.google.com/drive/folders/1WT4kJk5noVD3fj26h_E42glV78KOzC-r?usp=drive_link&pli=1" class="btn-main" data-lang="btn_cert_doc">Sertifika Belgelerini Görüntüle</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-header reveal">
+            <h2 class="section-title" data-lang="title_contact">İletişim</h2>
+        </div>
+        <div class="contact-box reveal">
+            <p data-lang="contact_msg">Bu kanallardan her zaman bana ulaşabilirsiniz.</p>
+            
+            <div class="contact-info">
+                <div class="contact-row">
+                    <i class="fas fa-envelope"></i>
+                    <span>akta.cemal@gmail.com</span>
+                </div>
+                <div class="contact-row">
+                    <i class="fas fa-phone"></i>
+                    <span>+90 546 606 89 46</span>
+                </div>
+                <div class="contact-row">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/cemalaktas" target="_blank" style="color:var(--text-main); text-decoration:none;">linkedin.com/in/cemalaktas</a>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <i class="fas fa-stopwatch"></i> <span data-lang="contact_note">Geri dönüşlerim ortalama olarak en geç 30 dakika içerisinde sağlanacaktır. Anlayışınız için teşekkür ederim.</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 M. Cemal Aktaş. All Systems Operational.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            tr: {
+                menu_about: "Hakkımda", menu_exp: "Deneyim", menu_projects: "Projeler", menu_achieve: "Başarılar", menu_cert: "Sertifikalar", menu_contact: "İletişim",
+                hero_btn: "İletişime Geç",
+                title_about: "Hakkımda",
+                about_p1: "2002 yılında Hatay Reyhanlı'da doğdum. Matematik ve Bilgisayar Programcılığı eğitimi aldım. Siber güvenlik ve IT yöneticiliği alanlarında uzmanlaştım.",
+                about_p2: "Siber güvenlik ve IT yöneticiliği alanlarında uzmanlaşmış bir teknoloji profesyoneliyim. Matematik ve Bilgisayar Programcılığı eğitimiyle şekillenen analitik düşünce yapım ve güçlü teknik becerilerimle, dijital güvenliği artırmayı ve teknoloji dünyasında yenilikçi çözümler sunmayı hedefliyorum.",
+                title_exp: "İş Deneyimleri",
+                exp_1_role: "CIO", exp_1_comp: "MCA Ahşap Ambalaj",
+                exp_2_role: "Siber Güvenlik J.", exp_2_comp: "Ghost Voice",
+                exp_3_role: "Siber Güvenlik Uzmanı", exp_3_comp: "Türkiye Siber Kümelenme",
+                exp_4_role: "Bilişim ve Siber Güvenlik Uzmanı", exp_4_comp: "Herevdeyim.com",
+                exp_5_role: "Sosyal Medya Yöneticisi", exp_5_comp: "Herevdeyim",
+                title_projects: "Projeler",
+                proj_1_title: "Mobil Uygulama",
+                proj_2_title: "Kali DDos Python",
+                proj_3_title: "Hadi Alışveriş Sitesi",
+                proj_4_title: "ESP Asistan Robot",
+                proj_desc: "İncelemek için aşağıdaki bağlantıya tıklayın.",
+                click_view: "İncelemek İçin Tıkla",
+                title_achieve: "Kritik Başarılar",
+                ach_shodan_title: "Shodan Zafiyet Keşfi",
+                ach_shodan_desc: "Shodan sisteminde kritik bir zafiyet tespit edildi ve CEO ile iletişime geçildi.",
+                ach_syber_title: "SyberTÜRK CTF Derecesi",
+                ach_syber_desc: "Ulusal çaptaki siber güvenlik yarışmasında üstün başarı ve sıralama.",
+                title_cert: "Sertifikalar & Eğitimler",
+                cert_1: "Ticari Yenilikler",
+                cert_2: "Innovation",
+                cert_3: "Sosyal Hizmetler",
+                cert_4: "Nicel Modelleme",
+                cert_5: "Finansal Planlama",
+                cert_6: "İnsan Kaynakları",
+                cert_7: "Siber Güvenlik Tehdit Alanı",
+                cert_8: "Bilgi Güv. İçin Sosyal Beceriler",
+                cert_9: "BT Güvenliği Esasları",
+                cert_10: "Liderler için Risk Alma",
+                cert_11: "VPN Öğrenmek",
+                cert_12: "Yöneticiler için Siber Güvenlik",
+                cert_13: "Etik Hack",
+                cert_14: "Sızma Testi Kursu",
+                cert_15: "Sosyal Medya Yönetimi",
+                btn_cert_doc: "Sertifika Belgelerini Görüntüle",
+                title_contact: "İletişim",
+                contact_msg: "Bu kanallardan her zaman bana ulaşabilirsiniz.",
+                contact_note: "Geri dönüşlerim ortalama olarak en geç 30 dakika içerisinde sağlanacaktır. Anlayışınız için teşekkür ederim."
+            },
+            en: {
+                menu_about: "About", menu_exp: "Experience", menu_projects: "Projects", menu_achieve: "Achievements", menu_cert: "Certificates", menu_contact: "Contact",
+                hero_btn: "Contact Me",
+                title_about: "About Me",
+                about_p1: "Born in 2002 in Hatay Reyhanlı. I studied Mathematics and Computer Programming. I specialized in Cybersecurity and IT Management.",
+                about_p2: "I am a technology professional specializing in cybersecurity and IT management. With my analytical mindset shaped by Math and Computer Programming education, I aim to increase digital security and provide innovative solutions in the tech world.",
+                title_exp: "Work Experience",
+                exp_1_role: "CIO", exp_1_comp: "MCA Wood Packaging",
+                exp_2_role: "Cyber Security J.", exp_2_comp: "Ghost Voice",
+                exp_3_role: "Cyber Security Specialist", exp_3_comp: "Turkey Cyber Cluster",
+                exp_4_role: "IT & Cyber Security Specialist", exp_4_comp: "Herevdeyim.com",
+                exp_5_role: "Social Media Manager", exp_5_comp: "Herevdeyim",
+                title_projects: "Projects",
+                proj_1_title: "Mobile Application",
+                proj_2_title: "Kali DDos Python",
+                proj_3_title: "Hadi Shopping Site",
+                proj_4_title: "ESP Assistant Robot",
+                proj_desc: "Click the link below to view details.",
+                click_view: "Click to View",
+                title_achieve: "Critical Achievements",
+                ach_shodan_title: "Shodan Vulnerability Discovery",
+                ach_shodan_desc: "Identified a critical vulnerability in the Shodan system and contacted the CEO.",
+                ach_syber_title: "SyberTÜRK CTF Ranking",
+                ach_syber_desc: "Outstanding success and ranking in the national cybersecurity competition.",
+                title_cert: "Certificates & Training",
+                cert_1: "Commercial Innovations",
+                cert_2: "Innovation",
+                cert_3: "Social Services",
+                cert_4: "Quantitative Modeling",
+                cert_5: "Financial Planning",
+                cert_6: "Human Resources",
+                cert_7: "Cybersecurity Threat Landscape",
+                cert_8: "Soft Skills for InfoSec",
+                cert_9: "IT Security Essentials",
+                cert_10: "Risk Taking for Leaders",
+                cert_11: "Learning VPN",
+                cert_12: "Cybersecurity for Managers",
+                cert_13: "Ethical Hacking",
+                cert_14: "Penetration Testing Course",
+                cert_15: "Social Media Management",
+                btn_cert_doc: "View Certificate Documents",
+                title_contact: "Contact",
+                contact_msg: "You can reach me anytime via these channels.",
+                contact_note: "My return time is usually within 30 minutes at the latest. Thank you for your understanding."
+            }
+        };
+
+        // --- 2. DİL DEĞİŞTİRME MEKANİZMASI ---
+        let currentLang = 'tr';
+        const langBtn = document.getElementById('lang-btn');
+
+        langBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'tr' ? 'en' : 'tr';
+            // Buton metnini güncelle
+            langBtn.textContent = currentLang === 'tr' ? 'TR / EN' : 'EN / TR';
+            
+            // Tüm 'data-lang' etiketli elementleri bul ve güncelle
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (translations[currentLang][key]) {
+                    // Fade out efekti için opacity ile oynayabiliriz ama hızlı geçiş için direkt değiştiriyoruz
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+            // Daktilo efektini de dilden dile göre resetle
+            resetTypewriter();
+        });
+
+        // --- 3. DAKTİLO EFEKTİ (Typewriter) ---
+        const typeElement = document.getElementById('typewriter');
+        let typeInterval;
+        
+        function resetTypewriter() {
+            clearInterval(typeInterval);
+            let text = currentLang === 'tr' ? 
+                "Siber Güvenlik Uzmanı | IT Yöneticisi | Beyaz Şapkalı Hacker" : 
+                "Cyber Security Specialist | IT Manager | White Hat Hacker";
+            
+            let i = 0;
+            typeElement.textContent = "";
+            typeInterval = setInterval(() => {
+                if(i < text.length) {
+                    typeElement.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typeInterval);
+                }
+            }, 50); // Yazma hızı
+        }
+        resetTypewriter(); // Başlangıçta çalıştır
+
+        // --- 4. NETWORK PARTICLE ANIMASYONU ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray = [];
+        class Particle {
+            constructor(){
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = (Math.random() * 1) - 0.5;
+                this.speedY = (Math.random() * 1) - 0.5;
+                this.color = '#00f3ff';
+            }
+            update(){
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if(this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                if(this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+            }
+            draw(){
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles(){
+            particlesArray = [];
+            let count = (canvas.width * canvas.height) / 8000;
+            for(let i=0; i<count; i++){
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateCanvas(){
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            for(let i=0; i<particlesArray.length; i++){
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                // Çizgiler
+                for(let j=i; j<particlesArray.length; j++){
+                    let dx = particlesArray[i].x - particlesArray[j].x;
+                    let dy = particlesArray[i].y - particlesArray[j].y;
+                    let distance = Math.sqrt(dx*dx + dy*dy);
+                    if(distance < 120){
+                        ctx.strokeStyle = `rgba(0, 243, 255, ${1 - distance/120})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+        
+        initParticles();
+        animateCanvas();
+
+        // --- 5. 3D KART TILT EFEKTİ ---
+        document.querySelectorAll('.cyber-card, .project-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                let rect = card.getBoundingClientRect();
+                let x = e.clientX - rect.left;
+                let y = e.clientY - rect.top;
+                let cx = rect.width / 2;
+                let cy = rect.height / 2;
+                let dx = (x - cx) / 70;
+                let dy = (y - cy) / 70;
+                card.style.transform = `rotateX(${-dy}deg) rotateY(${dx}deg)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+            });
+        });
+
+        // --- 6. SCROLL REVEAL ---
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                let windowHeight = window.innerHeight;
+                let elementTop = el.getBoundingClientRect().top;
+                let elementVisible = 100;
+                if(elementTop < windowHeight - elementVisible){
+                    el.classList.add('active');
+                }
+            });
+        });
+        
+
+       
+// Hacker pause menu
+
+let isPaused = false;
+const pauseMenu = document.createElement('div');
+pauseMenu.id = 'pause-menu';
+pauseMenu.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    flex-direction: column;
+`;
+
+pauseMenu.innerHTML = `
+    <div style="text-align: center; color: #0aff0a; font-family: 'Orbitron', 'Noto Sans', sans-serif;">
+        <div style="font-size: 4rem; font-weight: bold; text-shadow: 0 0 20px #0aff0a; margin-bottom: 20px; letter-spacing: 3px;">
+            ⏸ PAUSED ⏸
+        </div>
+        <div style="font-size: 1.5rem; color: #00ffff; margin-bottom: 40px; font-family: 'Share Tech Mono', 'Noto Sans'; letter-spacing: 2px;">
+            [ SYSTEM SUSPENDED ]
+        </div>
+        <div style="font-size: 1.1rem; color: #888; margin-bottom: 30px; font-family: 'JetBrains Mono';">
+            Press SPACEBAR to Resume
+        </div>
+        <div style="border-top: 2px solid #0aff0a; padding-top: 30px; margin-top: 30px; max-width: 600px; text-align: left;">
+            <div style="color: #0aff0a; font-size: 0.9rem; line-height: 2; font-family: 'Share Tech Mono', 'Noto Sans';">
+                <div>[ SYSTEM STATUS ]</div>
+                <div style="color: #00ffff; margin-left: 20px;">
+                    └─ CPU: <span id="pause-cpu">--</span>%<br>
+                    └─ MEMORY: <span id="pause-mem">--</span>%<br>
+                    └─ NETWORK: <span id="pause-net">--</span> Mbps<br>
+                    └─ UPTIME: <span id="pause-up">--</span>h
+                </div>
+            </div>
+        </div>
+    </div>
+`;
+
+document.body.appendChild(pauseMenu);
+
+function updatePauseStats() {
+    document.getElementById('pause-cpu').textContent = Math.floor(Math.random() * 100);
+    document.getElementById('pause-mem').textContent = Math.floor(Math.random() * 100);
+    document.getElementById('pause-net').textContent = Math.floor(Math.random() * 1000);
+    document.getElementById('pause-up').textContent = Math.floor(Math.random() * 365);
+}
+
+document.addEventListener('keydown', (e) => {
+    // ESC tuşu ile pause aç/kapat
+    if (e.key === 'Escape') {
+        isPaused = !isPaused;
+        if (isPaused) {
+            pauseMenu.style.display = 'flex';
+            updatePauseStats();
+        } else {
+            pauseMenu.style.display = 'none';
+        }
+    }
+    // SPACEBAR ile devam et
+    if (e.code === 'Space' && isPaused) {
+        e.preventDefault();
+        isPaused = false;
+        pauseMenu.style.display = 'none';
+    }
+});
+
+
+</script>
+
+
+</body>
+</html>
