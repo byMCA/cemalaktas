@@ -283,10 +283,64 @@
         footer { padding: 30px; text-align: center; border-top: 1px solid #333; background: #000; font-size: 0.8rem; color: #555; }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            nav { display: none; } 
-            .achievements-container { grid-template-columns: 1fr; }
+            header {
+                padding: 10px 14px;
+            }
+            .logo {
+                font-size: 1.15rem;
+            }
+            .lang-switch {
+                padding: 4px 10px;
+                font-size: 0.78rem;
+            }
+            .hero {
+                min-height: 82vh;
+                padding-top: 74px;
+            }
+            .hero h1 { font-size: 1.85rem; }
+            .hero h2 { font-size: 0.95rem; margin-bottom: 18px; }
+            .btn-main {
+                padding: 10px 22px;
+                letter-spacing: 1px;
+                font-size: 0.82rem;
+            }
+            section {
+                padding: 64px 5%;
+            }
+            .section-header {
+                margin-bottom: 28px;
+                padding-left: 12px;
+            }
+            .section-title {
+                font-size: 1.45rem;
+            }
+            .about-grid { grid-template-columns: 1fr; gap: 20px; }
+            .about-text { padding: 20px; }
+            .about-text p { font-size: 0.96rem !important; }
+            .about-stats i { font-size: 4.8rem !important; }
+            .timeline { margin-left: 10px; }
+            .timeline-item { padding-left: 20px; margin-bottom: 24px; }
+            .timeline-item h3 { font-size: 1.05rem; }
+            .timeline-item h4 { font-size: 0.9rem; }
+            .project-grid,
+            .cert-container,
+            .achievements-container {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .project-card,
+            .cyber-card,
+            .contact-box {
+                padding: 16px;
+            }
+            .project-card h3 { font-size: 1.08rem; }
+            .project-card p,
+            .cyber-card p { font-size: 0.92rem; }
+            .contact-info {
+                font-size: 1rem;
+                gap: 10px;
+            }
+            nav { display: none; }
         }
 
         @keyframes glitch {
@@ -348,7 +402,6 @@
             <h2 class="section-title" data-lang="title_exp">İş Deneyimleri</h2>
         </div>
         <div class="timeline reveal">
-            
             <div class="timeline-item">
                 <h3 data-lang="exp_1_role">CIO</h3>
                 <h4 data-lang="exp_1_comp">MCA Ahşap Ambalaj</h4>
@@ -373,7 +426,6 @@
                 <h3 data-lang="exp_5_role">Sosyal Medya Yöneticisi</h3>
                 <h4 data-lang="exp_5_comp">Herevdeyim</h4>
             </div>
-
         </div>
     </section>
 
@@ -382,7 +434,6 @@
             <h2 class="section-title" data-lang="title_projects">Projeler</h2>
         </div>
         <div class="project-grid reveal">
-            
             <div class="project-card">
                 <h3 data-lang="proj_1_title">Hadi Mobil Uygulama</h3>
                 <p data-lang="proj_desc">Gelişmiş mobil uygulama mimarisi ve güvenlik entegrasyonu.</p>
@@ -407,6 +458,23 @@
                 <a href="https://github.com/byMCA/Esp32-Asistan-Gpt" class="project-link" data-lang="click_view">İncelemek İçin Tıkla <i class="fas fa-arrow-right"></i></a>
             </div>
 
+            <div class="project-card" style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
+                <h3 data-lang="proj_5_title">🚀 Mars - Ütopik Web Sitesi</h3>
+                <p data-lang="proj_5_desc">Bu proje, fütüristik ve ütopik bir web sitesi tasarımıdır.</p>
+                <p>
+                    <strong data-lang="proj_live_demo_label">Canlı Demo:</strong> <a href="https://mars-dkxv.onrender.com/" target="_blank" data-lang="proj_5_live_link">Mars Sitesini Ziyaret Et</a> <br>
+                    <span style="font-size: 0.85em; color: #d9534f;" data-lang="proj_5_note">(Not: Bu site Render üzerinde barındırılmaktadır. Ücretsiz sunucu kullanıldığı için sitenin ilk yüklenmesi 1-2 dakika sürebilir, lütfen bekleyin.)</span>
+                </p>
+                <p><strong data-lang="proj_github_label">GitHub Kaynak Kodu:</strong> <a href="https://github.com/byMCA/mars" target="_blank">byMCA/mars</a></p>
+            </div>
+
+            <div class="project-card" style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+                <h3 data-lang="proj_6_title">👁️ ATLAS-AR-Neural-Link</h3>
+                <img src="unnamed.jpg" alt="ATLAS AR Glasses" data-lang-alt="proj_6_alt" style="float: right; width: 150px; border: 2px solid #555; border-radius: 10px; margin-left: 15px; box-shadow: 2px 2px 8px rgba(0,0,0,0.2);">
+                <p data-lang="proj_6_desc">Artırılmış gerçeklik (AR) ve nöral bağlantı (Neural Link) üzerine geliştirilen yenilikçi bir teknoloji konsepti.</p>
+                <p><strong data-lang="proj_github_label">GitHub Kaynak Kodu:</strong> <a href="https://github.com/byMCA/ATLAS-AR-Neural-Link" target="_blank">byMCA/ATLAS-AR-Neural-Link</a></p>
+                <div style="clear: both;"></div>
+            </div>
         </div>
     </section>
 
@@ -469,11 +537,11 @@
             <div class="contact-info">
                 <div class="contact-row">
                     <i class="fas fa-envelope"></i>
-                    <span>akta.cemal@gmail.com</span>
+                    <a href="mailto:akta.cemal@gmail.com?subject=Portfolyo%20Uzerinden%20Iletisim&body=Merhaba%20Cemal%20Bey%2C" style="color:var(--text-main); text-decoration:none;">akta.cemal@gmail.com</a>
                 </div>
                 <div class="contact-row">
                     <i class="fas fa-phone"></i>
-                    <span>+90 546 606 89 46</span>
+                    <a href="tel:+905466068946" style="color:var(--text-main); text-decoration:none;">+90 546 606 89 46</a>
                 </div>
                 <div class="contact-row">
                     <i class="fab fa-linkedin"></i>
@@ -510,6 +578,15 @@
                 proj_2_title: "Kali DDos Python",
                 proj_3_title: "Hadi Alışveriş Sitesi",
                 proj_4_title: "ESP Asistan Robot",
+                proj_5_title: "🚀 Mars - Ütopik Web Sitesi",
+                proj_5_desc: "Bu proje, fütüristik ve ütopik bir web sitesi tasarımıdır.",
+                proj_live_demo_label: "Canlı Demo:",
+                proj_5_live_link: "Mars Sitesini Ziyaret Et",
+                proj_5_note: "(Not: Bu site Render üzerinde barındırılmaktadır. Ücretsiz sunucu kullanıldığı için sitenin ilk yüklenmesi 1-2 dakika sürebilir, lütfen bekleyin.)",
+                proj_github_label: "GitHub Kaynak Kodu:",
+                proj_6_title: "👁️ ATLAS-AR-Neural-Link",
+                proj_6_alt: "ATLAS AR Gözlükleri",
+                proj_6_desc: "Artırılmış gerçeklik (AR) ve nöral bağlantı (Neural Link) üzerine geliştirilen yenilikçi bir teknoloji konsepti.",
                 proj_desc: "İncelemek için aşağıdaki bağlantıya tıklayın.",
                 click_view: "İncelemek İçin Tıkla",
                 title_achieve: "Kritik Başarılar",
@@ -536,7 +613,26 @@
                 btn_cert_doc: "Sertifika Belgelerini Görüntüle",
                 title_contact: "İletişim",
                 contact_msg: "Bu kanallardan her zaman bana ulaşabilirsiniz.",
-                contact_note: "Geri dönüşlerim ortalama olarak en geç 30 dakika içerisinde sağlanacaktır. Anlayışınız için teşekkür ederim."
+                contact_note: "Geri dönüşlerim ortalama olarak en geç 30 dakika içerisinde sağlanacaktır. Anlayışınız için teşekkür ederim.",
+                ai_title: "Asistan",
+                ai_subtitle: "Nöral Arayüz Çevrimiçi",
+                ai_status: "Siber Bağlantı: Stabil",
+                ai_welcome: "Merhaba! 👋 Ben Cemal Aktaş'ın dijital asistanıyım. Projeler veya CV hakkında bana soru sorabilirsiniz.",
+                ai_input_placeholder: "Bir soru sorun...",
+                ai_send: "Gönder",
+                ai_error_backend_missing: "Backend URL ayarlanmamış. Lütfen Cloudflare Worker adresinizi girin.",
+                ai_error_connection: "Sunucuya bağlanılamadı.",
+                ai_error_default: "Sunucu hatası",
+                ai_no_reply: "Yanıt alınamadı.",
+                ai_examples_label: "Örnek Sorular",
+                ai_q1: "Cemal Aktaş kimdir?",
+                ai_q2: "Neden işe alalım?",
+                ai_q3: "Hangi yılda doğdu?",
+                ai_q4: "Öne çıkan projeleri neler?",
+                ai_q5: "GitHub hesabı nedir?",
+                ai_q6: "Siber güvenlikte güçlü yönleri neler?",
+                ai_q7: "Deneyimlerini kısa özetler misin?",
+                ai_q8: "Shodan başarısı nedir?"
             },
             en: {
                 menu_about: "About", menu_exp: "Experience", menu_projects: "Projects", menu_achieve: "Achievements", menu_cert: "Certificates", menu_contact: "Contact",
@@ -555,6 +651,15 @@
                 proj_2_title: "Kali DDos Python",
                 proj_3_title: "Hadi Shopping Site",
                 proj_4_title: "ESP Assistant Robot",
+                proj_5_title: "🚀 Mars - Utopian Website",
+                proj_5_desc: "This project is a futuristic and utopian website design.",
+                proj_live_demo_label: "Live Demo:",
+                proj_5_live_link: "Visit Mars Website",
+                proj_5_note: "(Note: This site is hosted on Render. Since it uses a free server, the first load may take 1-2 minutes. Please wait.)",
+                proj_github_label: "GitHub Source Code:",
+                proj_6_title: "👁️ ATLAS-AR-Neural-Link",
+                proj_6_alt: "ATLAS AR Glasses",
+                proj_6_desc: "An innovative technology concept developed around augmented reality (AR) and neural interface (Neural Link).",
                 proj_desc: "Click the link below to view details.",
                 click_view: "Click to View",
                 title_achieve: "Critical Achievements",
@@ -581,32 +686,51 @@
                 btn_cert_doc: "View Certificate Documents",
                 title_contact: "Contact",
                 contact_msg: "You can reach me anytime via these channels.",
-                contact_note: "My return time is usually within 30 minutes at the latest. Thank you for your understanding."
+                contact_note: "My return time is usually within 30 minutes at the latest. Thank you for your understanding.",
+                ai_title: "Assistant",
+                ai_subtitle: "Interface Online",
+                ai_status: "Cyber Link: Stable",
+                ai_welcome: "Hello! 👋 I am Cemal Aktaş's digital assistant. You can ask me about projects or CV details.",
+                ai_input_placeholder: "Ask a question...",
+                ai_send: "Send",
+                ai_error_backend_missing: "Backend URL is not configured. Please enter your Cloudflare Worker address.",
+                ai_error_connection: "Unable to connect to server.",
+                ai_error_default: "Server error",
+                ai_no_reply: "No response received.",
+                ai_examples_label: "Example Questions",
+                ai_q1: "Who is Cemal Aktaş?",
+                ai_q2: "Why should we hire him?",
+                ai_q3: "What year was he born?",
+                ai_q4: "What are his standout projects?",
+                ai_q5: "What is his GitHub account?",
+                ai_q6: "What are his strengths in cybersecurity?",
+                ai_q7: "Can you summarize his experience briefly?",
+                ai_q8: "What is the Shodan achievement?"
             }
         };
 
-        // --- 2. DİL DEĞİŞTİRME MEKANİZMASI ---
         let currentLang = 'tr';
         const langBtn = document.getElementById('lang-btn');
 
         langBtn.addEventListener('click', () => {
             currentLang = currentLang === 'tr' ? 'en' : 'tr';
-            // Buton metnini güncelle
             langBtn.textContent = currentLang === 'tr' ? 'TR / EN' : 'EN / TR';
             
-            // Tüm 'data-lang' etiketli elementleri bul ve güncelle
             document.querySelectorAll('[data-lang]').forEach(element => {
                 const key = element.getAttribute('data-lang');
                 if (translations[currentLang][key]) {
-                    // Fade out efekti için opacity ile oynayabiliriz ama hızlı geçiş için direkt değiştiriyoruz
                     element.textContent = translations[currentLang][key];
                 }
             });
-            // Daktilo efektini de dilden dile göre resetle
+            document.querySelectorAll('[data-lang-alt]').forEach(element => {
+                const key = element.getAttribute('data-lang-alt');
+                if (translations[currentLang][key]) {
+                    element.setAttribute('alt', translations[currentLang][key]);
+                }
+            });
             resetTypewriter();
         });
 
-        // --- 3. DAKTİLO EFEKTİ (Typewriter) ---
         const typeElement = document.getElementById('typewriter');
         let typeInterval;
         
@@ -625,11 +749,10 @@
                 } else {
                     clearInterval(typeInterval);
                 }
-            }, 50); // Yazma hızı
+            }, 50);
         }
-        resetTypewriter(); // Başlangıçta çalıştır
+        resetTypewriter();
 
-        // --- 4. NETWORK PARTICLE ANIMASYONU ---
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -672,7 +795,6 @@
             for(let i=0; i<particlesArray.length; i++){
                 particlesArray[i].update();
                 particlesArray[i].draw();
-                // Çizgiler
                 for(let j=i; j<particlesArray.length; j++){
                     let dx = particlesArray[i].x - particlesArray[j].x;
                     let dy = particlesArray[i].y - particlesArray[j].y;
@@ -699,7 +821,6 @@
         initParticles();
         animateCanvas();
 
-        // --- 5. 3D KART TILT EFEKTİ ---
         document.querySelectorAll('.cyber-card, .project-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 let rect = card.getBoundingClientRect();
@@ -716,7 +837,6 @@
             });
         });
 
-        // --- 6. SCROLL REVEAL ---
         window.addEventListener('scroll', () => {
             document.querySelectorAll('.reveal').forEach(el => {
                 let windowHeight = window.innerHeight;
@@ -730,8 +850,6 @@
         
 
        
-// Hacker pause menu
-
 let isPaused = false;
 const pauseMenu = document.createElement('div');
 pauseMenu.id = 'pause-menu';
@@ -785,7 +903,6 @@ function updatePauseStats() {
 }
 
 document.addEventListener('keydown', (e) => {
-    // ESC tuşu ile pause aç/kapat
     if (e.key === 'Escape') {
         isPaused = !isPaused;
         if (isPaused) {
@@ -795,7 +912,6 @@ document.addEventListener('keydown', (e) => {
             pauseMenu.style.display = 'none';
         }
     }
-    // SPACEBAR ile devam et
     if (e.code === 'Space' && isPaused) {
         e.preventDefault();
         isPaused = false;
@@ -804,6 +920,495 @@ document.addEventListener('keydown', (e) => {
 });
 
 
+</script>
+
+
+<style>
+    #ai-bot-container {
+        position: fixed;
+        bottom: 12px;
+        right: 25px;
+        width: 335px;
+        border-radius: 18px;
+        background: rgba(10, 18, 34, 0.24);
+        color: #eaf3ff;
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.48), 0 0 24px rgba(0, 204, 255, 0.15);
+        z-index: 9999;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        overflow: hidden;
+        border: 1px solid rgba(140, 215, 255, 0.28);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    #ai-bot-container::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.06), rgba(17, 56, 102, 0.05));
+        pointer-events: none;
+    }
+
+    #ai-bot-container:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), 0 0 28px rgba(0, 204, 255, 0.22);
+    }
+
+    #ai-bot-header {
+        background: rgba(10, 25, 50, 0.24);
+        color: #fff;
+        padding: 12px 14px 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(130, 210, 255, 0.2);
+    }
+    #ai-bot-header:hover { background: rgba(12, 30, 58, 0.3); }
+
+    .ai-title-wrap { display: flex; flex-direction: column; gap: 2px; }
+    .ai-title-row { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: 0.4px; }
+    .ai-icon {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #79ffcf;
+        box-shadow: 0 0 10px #79ffcf;
+        animation: pulseDot 1.5s infinite;
+    }
+    .ai-subtitle {
+        font-size: 0.72rem;
+        color: #8ed9ff;
+        letter-spacing: 1.1px;
+        text-transform: uppercase;
+        opacity: 0.92;
+    }
+
+    #ai-chevron {
+        font-size: 1.2em;
+        transition: transform 0.2s ease;
+    }
+
+    #ai-top-strip {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 7px 14px;
+        background: rgba(0, 210, 255, 0.04);
+        color: #c9f2ff;
+        font-size: 0.7rem;
+        border-bottom: 1px solid rgba(130, 210, 255, 0.2);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #ai-top-strip::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        animation: scanBar 3s linear infinite;
+    }
+
+    #ai-bot-body {
+        padding: 14px;
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+        background: rgba(8, 18, 34, 0.24);
+        max-height: min(380px, calc(100vh - 180px));
+        overflow: hidden;
+    }
+
+    #chatWindow {
+        height: 210px;
+        overflow-y: auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border-radius: 12px;
+        background: rgba(6, 12, 24, 0.92);
+        border: 1px solid rgba(138, 214, 255, 0.18);
+        scrollbar-width: thin;
+        scrollbar-color: #23c2eb rgba(7, 15, 30, 0.9);
+    }
+
+    #chatWindow::-webkit-scrollbar { width: 6px; }
+    #chatWindow::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 8px; }
+    #chatWindow::-webkit-scrollbar-thumb { background-color: #23c2eb; border-radius: 10px; }
+
+    .message-bubble {
+        padding: 11px 14px;
+        border-radius: 16px;
+        max-width: 85%;
+        word-wrap: break-word;
+        font-size: 0.94rem;
+        line-height: 1.45;
+        box-shadow: 0 3px 9px rgba(0,0,0,0.25);
+        animation: msgIn 0.22s ease;
+    }
+    
+    .bot-msg-container { display: flex; justify-content: flex-start; }
+    .bot-msg {
+        background: rgba(42, 58, 84, 0.95);
+        color: #eaf5ff;
+        border-bottom-left-radius: 4px;
+    }
+
+    .user-msg-container { display: flex; justify-content: flex-end; }
+    .user-msg {
+        background: linear-gradient(135deg, #00d2ff, #0fabbc);
+        color: #fff;
+        font-weight: 600;
+        border-bottom-right-radius: 4px;
+    }
+    
+    #input-area {
+        display: flex;
+        gap: 10px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .ai-suggest-label {
+        font-size: 0.72rem;
+        color: #9edfff;
+        text-transform: uppercase;
+        letter-spacing: 0.9px;
+        margin-top: 2px;
+    }
+
+    #ai-suggest-row {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: thin;
+        scrollbar-color: #23c2eb rgba(7, 15, 30, 0.4);
+        scroll-snap-type: x proximity;
+    }
+
+    #ai-suggest-row::-webkit-scrollbar { height: 5px; }
+    #ai-suggest-row::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 8px; }
+    #ai-suggest-row::-webkit-scrollbar-thumb { background-color: #23c2eb; border-radius: 8px; }
+
+    .ai-chip {
+        border: 1px solid rgba(130, 210, 255, 0.35);
+        background: rgba(10, 28, 54, 0.75);
+        color: #d8efff;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        padding: 7px 12px;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+        scroll-snap-align: start;
+    }
+
+    .ai-chip:hover {
+        transform: translateY(-1px);
+        border-color: rgba(0, 222, 255, 0.8);
+        background: rgba(13, 40, 74, 0.9);
+    }
+
+    #userInput {
+        flex-grow: 1;
+        padding: 11px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border-radius: 25px;
+        outline: none;
+        transition: border 0.3s, box-shadow 0.3s;
+    }
+    #userInput::placeholder { color: rgba(255, 255, 255, 0.5); }
+    #userInput:focus {
+        border-color: #0fabbc;
+        box-shadow: 0 0 0 3px rgba(15, 171, 188, 0.15);
+    }
+
+    #sendBtn {
+        background: linear-gradient(135deg, #0fabbc, #00d2ff);
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: all 0.2s;
+        box-shadow: 0 4px 10px rgba(15, 171, 188, 0.3);
+    }
+    #sendBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(15, 171, 188, 0.5); }
+    #sendBtn:active { transform: translateY(1px); }
+
+    .typing {
+        display: inline-flex;
+        gap: 4px;
+        align-items: center;
+    }
+    .typing span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #d8f7ff;
+        animation: typingBlink 1s infinite ease-in-out;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.18s; }
+    .typing span:nth-child(3) { animation-delay: 0.36s; }
+
+    @keyframes pulseDot {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.35); opacity: 0.6; }
+    }
+    @keyframes scanBar {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+    @keyframes typingBlink {
+        0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+        40% { transform: translateY(-3px); opacity: 1; }
+    }
+    @keyframes msgIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+        #ai-bot-container {
+            width: calc(100% - 20px);
+            right: 10px;
+            bottom: 8px;
+        }
+        #ai-bot-header {
+            padding: 10px 12px 8px;
+        }
+        .ai-subtitle {
+            font-size: 0.62rem;
+            letter-spacing: 0.8px;
+        }
+        #ai-top-strip {
+            font-size: 0.62rem;
+            padding: 6px 12px;
+        }
+        #ai-bot-body {
+            padding: 10px;
+            gap: 8px;
+            max-height: min(320px, calc(100vh - 150px));
+        }
+        #chatWindow {
+            height: 160px;
+            padding: 8px;
+        }
+        .message-bubble {
+            font-size: 0.86rem;
+            padding: 9px 11px;
+        }
+        .ai-chip {
+            font-size: 0.72rem;
+            padding: 6px 10px;
+        }
+        #userInput {
+            font-size: 0.88rem;
+            padding: 9px 12px;
+        }
+        #sendBtn {
+            padding: 0 14px;
+            font-size: 0.82rem;
+        }
+    }
+</style>
+
+<div id="ai-bot-container">
+    <div id="ai-bot-header" onclick="toggleChat()">
+        <div class="ai-title-wrap">
+            <div class="ai-title-row"><span class="ai-icon"></span><span>🤖 <span data-lang="ai_title">Asistan</span></span></div>
+            <div class="ai-subtitle" data-lang="ai_subtitle">Neural Interface Online</div>
+        </div>
+        <span id="ai-chevron" style="font-size: 1.2em;">▾</span> 
+    </div>
+    <div id="ai-top-strip">
+        <span data-lang="ai_status">Cyber Link: Stable</span>
+        <span id="ai-time">--:--:--</span>
+    </div>
+    <div id="ai-bot-body">
+        <div id="chatWindow">
+            <div class="bot-msg-container">
+                <div class="message-bubble bot-msg" data-lang="ai_welcome">
+                    Merhaba! 👋 Ben Cemal Aktaş'ın dijital asistanıyım. Projeler veya CV hakkında bana soru sorabilirsiniz.
+                </div>
+            </div>
+        </div>
+
+        <div class="ai-suggest-label" data-lang="ai_examples_label">Örnek Sorular</div>
+        <div id="ai-suggest-row">
+            <button class="ai-chip" type="button" data-lang="ai_q1" onclick="askSuggestedQuestion('ai_q1')">Cemal Aktaş kimdir?</button>
+            <button class="ai-chip" type="button" data-lang="ai_q2" onclick="askSuggestedQuestion('ai_q2')">Neden işe alalım?</button>
+            <button class="ai-chip" type="button" data-lang="ai_q3" onclick="askSuggestedQuestion('ai_q3')">Hangi yılda doğdu?</button>
+            <button class="ai-chip" type="button" data-lang="ai_q4" onclick="askSuggestedQuestion('ai_q4')">Öne çıkan projeleri neler?</button>
+            <button class="ai-chip" type="button" data-lang="ai_q5" onclick="askSuggestedQuestion('ai_q5')">GitHub hesabı nedir?</button>
+            <button class="ai-chip" type="button" data-lang="ai_q6" onclick="askSuggestedQuestion('ai_q6')">Siber güvenlikte güçlü yönleri neler?</button>
+            <button class="ai-chip" type="button" data-lang="ai_q7" onclick="askSuggestedQuestion('ai_q7')">Deneyimlerini kısa özetler misin?</button>
+            <button class="ai-chip" type="button" data-lang="ai_q8" onclick="askSuggestedQuestion('ai_q8')">Shodan başarısı nedir?</button>
+        </div>
+        
+        <div id="input-area">
+            <input type="text" id="userInput" placeholder="Bir soru sorun..." onkeypress="handleKeyPress(event)">
+            <button id="sendBtn" onclick="sendMessage()" data-lang="ai_send">Gönder</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function t(key) {
+        return translations?.[currentLang]?.[key] || translations?.tr?.[key] || key;
+    }
+
+    function syncAssistantI18n() {
+        const userInputField = document.getElementById("userInput");
+        if (userInputField) {
+            userInputField.placeholder = t("ai_input_placeholder");
+        }
+    }
+
+    syncAssistantI18n();
+    langBtn.addEventListener('click', syncAssistantI18n);
+
+    function updateAiTime() {
+        const timeElement = document.getElementById("ai-time");
+        if (!timeElement) return;
+        const now = new Date();
+        const locale = currentLang === 'en' ? 'en-GB' : 'tr-TR';
+        timeElement.textContent = now.toLocaleTimeString(locale, { hour12: false });
+    }
+    updateAiTime();
+    setInterval(updateAiTime, 1000);
+
+    function toggleChat() {
+        const body = document.getElementById("ai-bot-body");
+        const chevron = document.getElementById("ai-chevron");
+        const isOpen = body.style.display === "flex";
+
+        if (isOpen) {
+            body.style.display = "none";
+            if (chevron) chevron.innerHTML = "▾";
+            return;
+        }
+
+        body.style.display = "flex";
+        if (chevron) chevron.innerHTML = "▴";
+        setTimeout(() => {
+            body.scrollTop = body.scrollHeight;
+        }, 100);
+    }
+
+    function escapeHTML(text) {
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+
+    function askSuggestedQuestion(key) {
+        const userInputField = document.getElementById("userInput");
+        if (!userInputField) return;
+        userInputField.value = t(key);
+        sendMessage();
+    }
+
+    async function sendMessage() {
+        const userInputField = document.getElementById("userInput");
+        const userInput = userInputField.value.trim();
+        const chatWindow = document.getElementById("chatWindow");
+
+        if (!userInput) return;
+
+        const safeUserInput = escapeHTML(userInput);
+        chatWindow.innerHTML += `
+            <div class="user-msg-container">
+                <div class="message-bubble user-msg">${safeUserInput}</div>
+            </div>`;
+        
+        userInputField.value = "";
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+        const loadingId = "loading-" + Date.now();
+        chatWindow.innerHTML += `
+            <div class="bot-msg-container" id="${loadingId}">
+                <div class="message-bubble bot-msg" style="opacity: 0.85;">
+                    <span class="typing"><span></span><span></span><span></span></span>
+                </div>
+            </div>`;
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+        try {
+            const backendURL = "https://cool-block-d635.akta-cemal.workers.dev/api/chat"; 
+            if (backendURL.includes("SIZIN-WORKER-ADINIZ") || backendURL.includes("SIZIN-SUBDOMAIN")) {
+                const loadingElement = document.getElementById(loadingId);
+                if (loadingElement) loadingElement.remove();
+                chatWindow.innerHTML += `
+                    <div class="bot-msg-container">
+                        <div class="message-bubble bot-msg" style="background: #c0392b; color: white;">${t("ai_error_backend_missing")}</div>
+                    </div>`;
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+                return;
+            }
+            
+            const response = await fetch(backendURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userInput })
+            });
+
+            const data = await response.json();
+
+            const loadingElement = document.getElementById(loadingId);
+            if (loadingElement) loadingElement.remove();
+
+            if (!response.ok || data.error) {
+                const safeApiError = data.error ? escapeHTML(data.error) : null;
+                const errorMessage = safeApiError || `${t("ai_error_default")} (${response.status})`;
+                 chatWindow.innerHTML += `
+                    <div class="bot-msg-container">
+                        <div class="message-bubble bot-msg" style="background: #c0392b; color: white;">${errorMessage}</div>
+                    </div>`;
+            } else {
+                const botReply = escapeHTML(data.choices?.[0]?.message?.content || t("ai_no_reply"));
+                chatWindow.innerHTML += `
+                    <div class="bot-msg-container">
+                        <div class="message-bubble bot-msg">${botReply}</div>
+                    </div>`;
+            }
+        } catch (error) {
+            const loadingElement = document.getElementById(loadingId);
+            if (loadingElement) loadingElement.remove();
+            chatWindow.innerHTML += `
+                <div class="bot-msg-container">
+                    <div class="message-bubble bot-msg" style="background: #c0392b; color: white;">${t("ai_error_connection")}</div>
+                </div>`;
+        }
+        
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    document.querySelectorAll('a[href^="http://"], a[href^="https://"]').forEach(link => {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+    });
 </script>
 
 
