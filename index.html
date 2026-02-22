@@ -1252,7 +1252,7 @@ document.addEventListener('keydown', (e) => {
 <div id="ai-bot-container">
     <div id="ai-bot-header" onclick="toggleChat()">
         <div class="ai-title-wrap">
-            <div class="ai-title-row"><span class="ai-icon"></span><span> ֎ <span data-lang="ai_title">Asistan</span></span></div>
+            <div class="ai-title-row"><span class="ai-icon"></span><span>🤖 <span data-lang="ai_title">Asistan</span></span></div>
             <div class="ai-subtitle" data-lang="ai_subtitle">Neural Interface Online</div>
         </div>
         <span id="ai-chevron" style="font-size: 1.2em;">▾</span> 
@@ -1429,6 +1429,81 @@ document.addEventListener('keydown', (e) => {
         chatWindow.scrollTop = chatWindow.scrollHeight;
     }
 
+    const BACKGROUND_MUSIC_SRC = "0222.mp3";
+    const OVERLAP_SECONDS = 6;
+    const musicTrackA = new Audio(BACKGROUND_MUSIC_SRC);
+    const musicTrackB = new Audio(BACKGROUND_MUSIC_SRC);
+
+    [musicTrackA, musicTrackB].forEach(track => {
+        track.preload = "auto";
+        track.loop = false;
+        track.volume = 0.22;
+    });
+
+    let activeMusicTrack = musicTrackA;
+    let nextMusicTrack = musicTrackB;
+    let overlapTimerId = null;
+    let musicSystemStarted = false;
+
+    function clearMusicTimer() {
+        if (overlapTimerId) {
+            clearTimeout(overlapTimerId);
+            overlapTimerId = null;
+        }
+    }
+
+    function scheduleMusicOverlap() {
+        clearMusicTimer();
+
+        if (!Number.isFinite(activeMusicTrack.duration) || activeMusicTrack.duration <= OVERLAP_SECONDS) {
+            return;
+        }
+
+        const waitMs = Math.max((activeMusicTrack.duration - OVERLAP_SECONDS - activeMusicTrack.currentTime) * 1000, 250);
+
+        overlapTimerId = setTimeout(async () => {
+            try {
+                nextMusicTrack.currentTime = 0;
+                await nextMusicTrack.play();
+                const previousTrack = activeMusicTrack;
+                activeMusicTrack = nextMusicTrack;
+                nextMusicTrack = previousTrack;
+                scheduleMusicOverlap();
+            } catch (e) {
+                musicSystemStarted = false;
+            }
+        }, waitMs);
+    }
+
+    async function startSeamlessBackgroundMusic() {
+        if (musicSystemStarted) return;
+        musicSystemStarted = true;
+
+        try {
+            activeMusicTrack.currentTime = 0;
+            await activeMusicTrack.play();
+
+            if (Number.isFinite(activeMusicTrack.duration) && activeMusicTrack.duration > OVERLAP_SECONDS) {
+                scheduleMusicOverlap();
+            } else {
+                activeMusicTrack.addEventListener("loadedmetadata", scheduleMusicOverlap, { once: true });
+            }
+        } catch (e) {
+            musicSystemStarted = false;
+        }
+    }
+
+    function unlockAndStartMusic() {
+        startSeamlessBackgroundMusic();
+        document.removeEventListener("pointerdown", unlockAndStartMusic);
+        document.removeEventListener("keydown", unlockAndStartMusic);
+        document.removeEventListener("touchstart", unlockAndStartMusic);
+    }
+
+    document.addEventListener("pointerdown", unlockAndStartMusic);
+    document.addEventListener("keydown", unlockAndStartMusic);
+    document.addEventListener("touchstart", unlockAndStartMusic);
+
     document.querySelectorAll('a[href^="http://"], a[href^="https://"]').forEach(link => {
         link.setAttribute('target', '_blank');
         link.setAttribute('rel', 'noopener noreferrer');
@@ -1439,4 +1514,3 @@ document.addEventListener('keydown', (e) => {
 </body>
 
 </html>
-
